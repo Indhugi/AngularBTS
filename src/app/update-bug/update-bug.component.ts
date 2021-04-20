@@ -12,7 +12,11 @@ export class UpdateBugComponent implements OnInit {
   bug: Bug = new Bug();
   constructor(private bugService: BugService) { }
   updateBug() {
-
+    let updateBug = (<HTMLInputElement>document.getElementById('updateBug'))
+    if (!updateBug.checkValidity()) {
+      alert('Form is Invalid! Please check whether all mandatory fields are filled!');
+      return;
+    }
     let bugId = (<HTMLInputElement>document.getElementById('bugId')).value
     const updatedBody = {
       title: (<HTMLInputElement>document.getElementById('title')).value,

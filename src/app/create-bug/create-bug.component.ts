@@ -17,7 +17,7 @@ export class CreateBugComponent implements OnInit {
   saveBug() {
     let createBug = (<HTMLInputElement>document.getElementById('createBug'))
     if (!createBug.checkValidity()) {
-      alert('form is invalid');
+      alert('Form is Invalid! Please check whether all mandatory fields are filled!');
       return;
     }
     const promise = this.bugService.saveBug(this.bug);
