@@ -20,7 +20,7 @@
     <div class="form-group row">
 
       <div class="col-sm-6">
-        <input type="text" class="form-control" placeholder="Enter Bug Title" id="bugTitle" [(ngModel)]="bug.title"
+        <input type="text" maxlength="200" class="form-control" (click)="disablestatus()" placeholder="Enter Bug Title" id="bugTitle" [(ngModel)]="bug.title"
           name="bugTitle" required>
       </div>
 
@@ -29,7 +29,7 @@
           name="bugStatus" required>
       </div> -->
       <div class="col-sm-6">
-        <select class="form-control" id="bugStatus" placeholder="Choose Bug Status"[(ngModel)]="bug.status" name="bugStatus" required>
+        <select class="form-control" id="bugStatus" (click)="disabletitle()" [(ngModel)]="bug.status" name="bugStatus" required>
           <option value="" disabled selected>Select Status</option>
           <option>NEW</option>
           <option>OPEN</option>
@@ -76,23 +76,22 @@
           <td scope="col" style="border: 2px solid #000000;">Product</td>
           <td scope="col" style="border: 2px solid #000000;">ETA</td>
 
-
         </thead>
         <tbody id="bugsTable" style="border: 2px solid #000000">
           <ng-container *ngFor="let bug of bugList,index as i">
 
             <tr>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.title}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.description}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.status}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.priority}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.type}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.submitOnDate}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.buildVersion}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.projectId}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.module}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.product}}</td>
-              <td scope="col" style="border: 1px solid #000000;">{{bug.etaDate}}</td>
+              <td id="titlewidth"scope="col" style="border: 2px solid #000000;">{{bug.title}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.description}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.status|titlecase}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.priority|titlecase}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.type|titlecase}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.submitOn|date}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.buildVersion}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.projectId}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.module}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.product}}</td>
+              <td scope="col" style="border: 2px solid #000000;">{{bug.etaDate|date}}</td>
             </tr>
           </ng-container>
 

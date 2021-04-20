@@ -14,6 +14,12 @@ export class GetBugComponent implements OnInit {
   bugList: any;
   searchElement: any;
   responseList: Boolean;
+disablestatus(){
+  (<HTMLInputElement>document.getElementById('bugStatus')).disabled=true;
+}
+disabletitle(){
+  (<HTMLInputElement>document.getElementById('bugTitle')).disabled=true;
+}
   getBug() {
     let bugStatus = (<HTMLInputElement>document.getElementById('bugStatus')).value;
     let bugTitle = (<HTMLInputElement>document.getElementById('bugTitle')).value;
@@ -25,8 +31,7 @@ export class GetBugComponent implements OnInit {
       this.bugService.getBug(endpointURL).subscribe(response => {
         this.bugList = response;
         console.log(response);
-        alert('Bug Listed .....')
-
+        alert('Bug Listed .....');
       },
         error => {
           console.log(error);

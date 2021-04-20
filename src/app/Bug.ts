@@ -11,8 +11,8 @@ export class Bug{
   projectId:string;
   submitOnDate:Date;
   module:string;
-  description:string;
-  title:string;
+  description='';
+  title='';
   product:string;
   etaDate:Date;
 }

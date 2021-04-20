@@ -6,12 +6,16 @@
       width: 100%;
   }
 }
-
 table{
   border: 2px solid #000000;
   margin-top:50px;
 }
-
-td{
-  border: 5px solid #000000;
+#titlewidth{
+  word-wrap: break-word;
+}
+thead{
+  background-color: #007bff;
+}
+thead td{
+  color:white;
 }
