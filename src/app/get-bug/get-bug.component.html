@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Search Bug</title>
+
+</head>
+
+<body>
+  <!-- NavBar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="../index.html">Bug Tracking System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="../html/createBug.html">Create Bug <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="editBug.html">Edit Bug <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="contactUs.html">Contact Us<span class="sr-only">(current)</span></a>
+        </li>
+
+
+      </ul>
+    </div>
+  </nav>
+
+
+  <form class="jumbotron required" id="searchBug">
+    <div class="form-group row">
+
+      <div class="col-sm-6">
+        <input type="text" class="form-control" placeholder="Enter Bug Title" id="bugTitle" [(ngModel)]="bug.title"
+          name="bugTitle" required>
+      </div>
+
+      <!-- <div class="col-sm-6">
+        <input type="text" class="form-control" placeholder="Enter Bug Status" id="bugStatus" [(ngModel)]="bug.status"
+          name="bugStatus" required>
+      </div> -->
+      <div class="col-sm-6">
+        <select class="form-control" id="bugStatus" placeholder="Choose Bug Status"[(ngModel)]="bug.status" name="bugStatus" required>
+          <option value="" disabled selected>Select Status</option>
+          <option>NEW</option>
+          <option>OPEN</option>
+          <option>ASSIGNED</option>
+          <option>FIXED</option>
+          <option>PENDING_RETEST</option>
+          <option>RETEST</option>
+          <option>REOPEN</option>
+          <option>VERIFIED</option>
+          <option>CLOSED</option>
+          <option>NOT_A_BUG</option>
+          <option>REJECTED</option>
+          <option>DUPLICATE</option>
+          <option>DEFERRED</option>
+          <option>COULDNT_REPRODUCE</option>
+          <option>NEED_MORE_INFORMATION</option>
+        </select>
+      </div>
+
+    </div>
+    <div>
+      <div class="text-center" style="margin-top: 50px;">
+        <button type="button" class="btn btn-outline-primary col-sm-6" (click)="getBug()"> Get Bug</button>
+      </div>
+
+    </div>
+    <!-- <div class="text-center " style="margin-top:50px">
+      <button type="button" class="btn btn-outline-primary form-control" (click)="getBugs()">Get all Bugs</button>
+    </div>-->
+
+    <div class="table-responsive">
+      <table class=" table table-bordered ">
+        <thead>
+
+          <td scope="col" style="border: 2px solid #000000;"> Title </td>
+          <td scope="col" style="border: 2px solid #000000;"> Description </td>
+          <td scope="col" style="border: 2px solid #000000;"> Status </td>
+          <td scope="col" style="border: 2px solid #000000;"> Priority </td>
+          <td scope="col" style="border: 2px solid #000000;">Type </td>
+          <td scope="col" style="border: 2px solid #000000;">Submitted On </td>
+          <td scope="col" style="border: 2px solid #000000;"> Build Version</td>
+          <td scope="col" style="border: 2px solid #000000;"> Project ID</td>
+          <td scope="col" style="border: 2px solid #000000;">Module</td>
+          <td scope="col" style="border: 2px solid #000000;">Product</td>
+          <td scope="col" style="border: 2px solid #000000;">ETA</td>
+
+
+        </thead>
+        <tbody id="bugsTable" style="border: 2px solid #000000">
+          <ng-container *ngFor="let bug of bugList,index as i">
+
+            <tr>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.title}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.description}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.status}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.priority}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.type}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.submitOnDate}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.buildVersion}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.projectId}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.module}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.product}}</td>
+              <td scope="col" style="border: 1px solid #000000;">{{bug.etaDate}}</td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+
+      </table>
+    </div>
+
+  </form>
+
+  <app-footer></app-footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>
