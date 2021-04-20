@@ -55,20 +55,6 @@
           <select class="form-control" id="status" [(ngModel)]="bug.status" name="status" required>
             <option value="" disabled selected>Select Option</option>
             <option>NEW</option>
-            <option>OPEN</option>
-            <option>ASSIGNED</option>
-            <option>FIXED</option>
-            <option>PENDING_RETEST</option>
-            <option>RETEST</option>
-            <option>REOPEN</option>
-            <option>VERIFIED</option>
-            <option>CLOSED</option>
-            <option>NOT_A_BUG</option>
-            <option>REJECTED</option>
-            <option>DUPLICATE</option>
-            <option>DEFERRED</option>
-            <option>COULDNT_REPRODUCE</option>
-            <option>NEED_MORE_INFORMATION</option>
           </select>
         </div>
       </div>
@@ -152,15 +138,5 @@
     <button type="button" class="btn btn-outline-primary form-control" (click)='saveBug()'>Create</button>
 
   </div>
-
-  <app-footer></app-footer>
 </body>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </html>
