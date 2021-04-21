@@ -20,7 +20,7 @@
     <div class="form-group row">
 
       <div class="col-sm-6">
-        <input type="text" maxlength="200" class="form-control" (click)="disablestatus()" placeholder="Enter Bug Title" id="bugTitle" [(ngModel)]="bug.title"
+        <input type="text" maxlength="200" class="form-control"  placeholder="Enter Bug Title" id="bugTitle" [(ngModel)]="bug.title"
           name="bugTitle" required>
       </div>
 
@@ -29,7 +29,7 @@
           name="bugStatus" required>
       </div> -->
       <div class="col-sm-6">
-        <select class="form-control" id="bugStatus" (click)="disabletitle()" [(ngModel)]="bug.status" name="bugStatus" required>
+        <select class="form-control" id="bugStatus"  [(ngModel)]="bug.status" name="bugStatus" required>
           <option value="" disabled selected>Select Status</option>
           <option>NEW</option>
           <option>OPEN</option>

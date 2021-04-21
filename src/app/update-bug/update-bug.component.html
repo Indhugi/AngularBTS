@@ -21,19 +21,21 @@
   <form class="jumbotron required" id="updateBug">
     <div>
       <div class="form-group row">
-        <label for="colFormLabelLg" class="col-lg-2 col-form-label control-label">Bug ID</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" placeholder="Enter Bug Id" id="bugId" [(ngModel)]="bug.id"
-            name="bugId" required>
-        </div>
         <label for="colFormLabelLg" class="col-lg-2 col-form-label control-label">Title</label>
         <div class="col">
           <textarea minlength="5" maxlength="200" class="form-control" placeholder="Title in less than 200 characters"
             id="title" id="title" [(ngModel)]="bug.title" name="title" required></textarea>
             <span style="font-size: small;">{{200 - bug.title.length}} characters left</span>
         </div>
+        <button (click)="getBugName()"></button>
+        <label for="colFormLabelLg" class="col-lg-2 col-form-label control-label">Bug ID</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter Bug Id" id="bugId" [(ngModel)]="bug.id"
+            name="bugId">
+        </div>
       </div>
     </div>
+    <div>
     <div>
       <div class="form-group row">
         <label for="colFormLabelLg" class="col-lg-2 col-form-label control-label">Description</label>
@@ -140,7 +142,7 @@
           required>
       </div>
     </div>
-
+</div>
     <p style="margin-top:30px">
       <span class="required control-label"></span>Required field
     </p>

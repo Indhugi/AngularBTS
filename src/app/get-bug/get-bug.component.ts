@@ -30,12 +30,17 @@ disabletitle(){
       endpointURL = endpointURL + 'status/' + bugStatus;
       this.bugService.getBug(endpointURL).subscribe(response => {
         this.bugList = response;
-        console.log(response);
-        alert('Bug Listed .....');
+        if(response!=null){
+          console.log(response);
+          alert('Bug Listed!!');
+        }
+        else{
+          alert("Bug with "+ bugStatus +" not found");
+        }
       },
         error => {
           console.log(error);
-          alert(error.statusText);
+          alert("Error Happened!!");
 
         }
       )
@@ -44,13 +49,18 @@ disabletitle(){
       endpointURL = endpointURL + 'title/' + bugTitle;
       this.bugService.getBug(endpointURL).subscribe(response => {
         this.bugList = [response];
-        console.log(response);
-        alert('Bug Listed .....')
+        if(response!=null){
+          console.log(response);
+          alert('Bug Listed!');
+        }
+        else{
+          alert("Bug with "+ bugTitle +" not found");
+        }
 
       },
         error => {
           console.log(error);
-          alert(error.statusText);
+          alert("Error Happened!!");
 
         }
       )
