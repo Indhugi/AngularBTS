@@ -15,6 +15,10 @@ export class GetBugComponent implements OnInit {
   searchElement: any;
   responseList: Boolean;
   deleteBug(bugId){
+    let ask=confirm("Do you want to delete bug this bug ?");
+    if (!ask){
+      return;
+    }
     this.bugService.deleteBug(bugId).subscribe(response => {
       this.bugList = response;
       console.log(response);
