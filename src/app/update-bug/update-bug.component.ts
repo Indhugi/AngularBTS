@@ -23,7 +23,17 @@ export class UpdateBugComponent implements OnInit {
         console.log(this.bugList);
         if(this.bugList){
             this.bug=this.bugList;
-        }
+            let resEtaDate = this.bug.etaDate;
+            let resSubmitDate=this.bugList.submitOn;
+            if (resSubmitDate) {
+              let finalSubmitDate = resSubmitDate.split('T')[0];
+              this.bug.submitOnDate = finalSubmitDate;
+            }
+             if (resEtaDate) {
+                let finalEtaDate = resEtaDate.split('T')[0];
+                this.bug.etaDate = finalEtaDate;
+              }
+      }
         else{
           alert("Given Bug with title "+bugTitle+" is not available");
         }
@@ -53,7 +63,7 @@ export class UpdateBugComponent implements OnInit {
       priority: (<HTMLInputElement>document.getElementById('priority')).value,
       status: (<HTMLInputElement>document.getElementById('status')).value,
       type: (<HTMLInputElement>document.getElementById('type')).value,
-      submitOnDate: (<HTMLInputElement>document.getElementById('submitOnDate')).valueAsDate,
+      submitOnDate: (<HTMLInputElement>document.getElementById('submitOnDate')).value,
       buildVersion: (<HTMLInputElement>document.getElementById('buildVersion')).value,
       projectId: (<HTMLInputElement>document.getElementById('projectId')).value,
       module: (<HTMLInputElement>document.getElementById('module')).value,

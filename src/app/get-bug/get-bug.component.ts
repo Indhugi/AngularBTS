@@ -56,7 +56,7 @@ export class GetBugComponent implements OnInit {
     else {
       endpointURL = endpointURL + 'title/' + bugTitle;
       this.bugService.getBug(endpointURL).subscribe(response => {
-        this.bugList = [response];
+        this.bugList = response;
         if(response!=null){
           console.log(response);
           alert('Bug Listed!');
