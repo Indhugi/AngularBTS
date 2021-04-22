@@ -30,9 +30,13 @@ export class UpdateBugComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error.statusText);
+        alert("Error Happened!");
     }
     )
+  }
+  else{
+    alert("Specify title to fetch bug details");
+
   }
 }
   updateBug() {
@@ -60,11 +64,11 @@ export class UpdateBugComponent implements OnInit {
     this.bugService.updateBug(bugId, updatedBody).subscribe(
       response => {
         console.log(response);
-        alert("Bug updated....");
+        alert("Bug updated!");
       },
       error => {
         console.log(error);
-        alert(error.statusText);
+        alert("Error Happened!");
 
       }
     )

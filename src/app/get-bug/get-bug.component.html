@@ -75,10 +75,11 @@
           <td scope="col" style="border: 2px solid #000000;">Module</td>
           <td scope="col" style="border: 2px solid #000000;">Product</td>
           <td scope="col" style="border: 2px solid #000000;">ETA</td>
+          <td scope="col" style="border: 2px solid #000000;">Action</td>
 
         </thead>
         <tbody id="bugsTable" style="border: 2px solid #000000">
-          <ng-container *ngFor="let bug of bugList,index as i">
+          <ng-container *ngFor="let bug of bugList">
 
             <tr>
               <td id="titlewidth"scope="col" style="border: 2px solid #000000;">{{bug.title}}</td>
@@ -92,6 +93,7 @@
               <td scope="col" style="border: 2px solid #000000;">{{bug.module}}</td>
               <td scope="col" style="border: 2px solid #000000;">{{bug.product}}</td>
               <td scope="col" style="border: 2px solid #000000;">{{bug.etaDate|date}}</td>
+              <td scope="col" style="border: 2px solid #000000;"><button type="button" class="btn btn-outline-danger" (click)='this.deleteBug(bug.id)'>Delete</button></td>
             </tr>
           </ng-container>
 

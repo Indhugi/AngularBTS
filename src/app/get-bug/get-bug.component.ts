@@ -14,12 +14,20 @@ export class GetBugComponent implements OnInit {
   bugList: any;
   searchElement: any;
   responseList: Boolean;
-disablestatus(){
-  (<HTMLInputElement>document.getElementById('bugStatus')).disabled=true;
-}
-disabletitle(){
-  (<HTMLInputElement>document.getElementById('bugTitle')).disabled=true;
-}
+  deleteBug(bugId){
+    this.bugService.deleteBug(bugId).subscribe(response => {
+      this.bugList = response;
+      console.log(response);
+      alert("Bug Deleted!")
+      this.getBugs();
+    },
+      error => {
+        console.log(error);
+        alert("Error Happened!");
+
+      }
+    )
+  }
   getBug() {
     let bugStatus = (<HTMLInputElement>document.getElementById('bugStatus')).value;
     let bugTitle = (<HTMLInputElement>document.getElementById('bugTitle')).value;
@@ -69,11 +77,7 @@ disabletitle(){
 
 
   }
-  // getBugs() {
-
-  // }
-
-  ngOnInit(): void {
+   getBugs() {
     this.bugService.getBugs().subscribe(response => {
       this.bugList = response;
       console.log(response);
@@ -85,6 +89,10 @@ disabletitle(){
 
       }
     )
+   }
+
+  ngOnInit(): void {
+    this.getBugs();
   }
 
 }
