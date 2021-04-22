@@ -17,7 +17,7 @@ export class UpdateBugComponent implements OnInit {
     let bugTitle=(<HTMLInputElement>document.getElementById('title')).value;
     if (bugTitle) {
       endpointURL = endpointURL + 'title/' + bugTitle;
-      const promise = this.bugService.getBug(endpointURL);
+      const promise = this.bugService.getBugByName(bugTitle);
       promise.subscribe(response => {
         this.bugList = response;
         console.log(this.bugList);
