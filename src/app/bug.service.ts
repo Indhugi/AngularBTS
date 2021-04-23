@@ -12,7 +12,7 @@ export class BugService {
     return this.http.post('http://localhost:8080/bug', bug, {
       headers: {
         "content-type": 'application/json',
-        reponseType: 'text'
+        responseType: 'text'
       }
     });
   }
@@ -37,6 +37,7 @@ export class BugService {
 
   // }
 
+
   getBugByName(title: string) {
     const endpointURL = 'http://localhost:8080/bug/'
     return this.http.get(endpointURL + 'title/' + title);
@@ -47,9 +48,11 @@ export class BugService {
   }
 
   getBugByNameAndStatus(title: string, status: string) {
-    const endpointURL = 'http://localhost:8080/bug/'
-    return this.http.get(endpointURL + 'search/' + title + '?status=' + status);
+    let titletrim=title.trim();
+    const endpointURL = 'http://localhost:8080/bug/search/'
+    return this.http.get(endpointURL + titletrim + '/' + status);
   }
+
   deleteBug(bugId){
     const endpointURL = 'http://localhost:8080/bug/' + bugId;
     return this.http.delete(endpointURL);

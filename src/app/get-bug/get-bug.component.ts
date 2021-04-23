@@ -28,10 +28,11 @@ export class GetBugComponent implements OnInit {
       error => {
         console.log(error);
         alert("Error Happened!");
-
       }
     )
   }
+
+  //old implementation
   // getBug() {
   //   let bugStatus = (<HTMLInputElement>document.getElementById('bugStatus')).value;
   //   let bugTitle = (<HTMLInputElement>document.getElementById('bugTitle')).value;
@@ -40,7 +41,7 @@ export class GetBugComponent implements OnInit {
   //   if (Object.values(STATUS).includes(bugStatus)) {
 
   //     endpointURL = endpointURL + 'status/' + bugStatus;
-  //     this.bugService.getBugByName(bugTitle).subscribe(response => {
+  //     this.bugService.getBugByStatus(bugStatus).subscribe(response => {
   //       this.bugList = response;
   //       if(response!=null){
   //         console.log(response);
@@ -59,7 +60,7 @@ export class GetBugComponent implements OnInit {
   //   }
   //   else {
   //     endpointURL = endpointURL + 'title/' + bugTitle;
-  //     this.bugService.getBugByStatus(bugStatus).subscribe(response => {
+  //     this.bugService.getBugByName(bugTitle).subscribe(response => {
   //       this.bugList = response;
   //       if(response!=null){
   //         console.log(response);
@@ -77,10 +78,10 @@ export class GetBugComponent implements OnInit {
   //       }
   //     )
   //   }
-
-
-
   // }
+
+
+  //new search implementation
   getBug() {
     let status = (<HTMLInputElement>document.getElementById('bugStatus')).value;
     let bugTitle = (<HTMLInputElement>document.getElementById('bugTitle')).value;
@@ -88,14 +89,14 @@ export class GetBugComponent implements OnInit {
       if (bugTitle.trim()) {
         const promise = this.bugService.getBugByName(bugTitle);
         promise.subscribe(response => {
-          this.bugList = response;
-          if (this.bugList) {
-            alert("Bug Listed!!")
-            this.bugArray = this.bugList;
+          this.bugList = [response];
+          if (response!=null) {
+            console.log(response);
+            alert("Bug Listed!");
           }
           else {
             alert("Record not found");
-            this.bugArray = [];
+            this.getBugs();
           }
         },
           error => {
@@ -103,7 +104,7 @@ export class GetBugComponent implements OnInit {
           });
       }
       else {
-        alert("please provide bug name");
+        alert("please provide bug title");
         this.bugArray = [];
       }
     }
@@ -111,8 +112,10 @@ export class GetBugComponent implements OnInit {
       const promise = this.bugService.getBugByStatus(status);
       promise.subscribe(response => {
         this.bugList = response;
-        if (this.bugList) {
-          this.bugArray = this.bugList;
+        this.bugArray=this.bugList;
+        if (this.bugArray.length>0) {
+          //this.bugArray = this.bugList;
+          alert("Bug Listed!")
         }
         else {
           alert("No Bug with Status : " + status + " found");
@@ -120,15 +123,17 @@ export class GetBugComponent implements OnInit {
         }
       },
         error => {
-          alert('error happened..')
+          alert('Error Happened..')
         })
     }
     else if (bugTitle && status) {
       const promise = this.bugService.getBugByNameAndStatus(bugTitle, status);
       promise.subscribe(response => {
         this.bugList = response;
-        if (this.bugList) {
+        this.bugArray=this.bugList;
+        if (this.bugArray.length>0) {
           this.bugArray = this.bugList;
+          alert("Bug Listed!");
         }
         else {
           alert("No Bug with Name : " + bugTitle + " and Status : " + status + " found");
@@ -136,7 +141,7 @@ export class GetBugComponent implements OnInit {
         }
       },
         error => {
-          alert('error happened..')
+          alert('Error Happened..')
         })
     }
     else {
