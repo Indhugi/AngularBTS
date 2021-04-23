@@ -55,22 +55,21 @@
 
         <div class="col">
           <select class="form-control" id="status" [(ngModel)]="bug.status" name="status" required>
-          <option value="" disabled>Select Option</option>
           <option value="NEW" selected>NEW</option>
-          <option disabled>OPEN</option>
-          <option disabled>ASSIGNED</option>
-          <option disabled>FIXED</option>
-          <option disabled>PENDING_RETEST</option>
-          <option disabled>RETEST</option>
-          <option disabled>REOPEN</option>
-          <option disabled>VERIFIED</option>
-          <option disabled>CLOSED</option>
-          <option disabled>NOT_A_BUG</option>
-          <option disabled>REJECTED</option>
-          <option disabled>DUPLICATE</option>
-          <option disabled>DEFERRED</option>
-          <option disabled>COULDNT_REPRODUCE</option>
-          <option disabled>NEED_MORE_INFORMATION</option>
+          <option hidden>OPEN</option>
+          <option hidden>ASSIGNED</option>
+          <option hidden>FIXED</option>
+          <option hidden>PENDING_RETEST</option>
+          <option hidden>RETEST</option>
+          <option hidden>REOPEN</option>
+          <option hidden>VERIFIED</option>
+          <option hidden>CLOSED</option>
+          <option hidden>NOT_A_BUG</option>
+          <option hidden>REJECTED</option>
+          <option hidden>DUPLICATE</option>
+          <option hidden>DEFERRED</option>
+          <option hidden>COULDNT_REPRODUCE</option>
+          <option hidden>NEED_MORE_INFORMATION</option>
           </select>
         </div>
       </div>
@@ -101,13 +100,13 @@
 
     <div>
       <div class="form-group row">
-        <label for="colFormLabelLg" class="col-lg-2 col-form-label control-label">Build Version</label>
+        <label for="colFormLabelLg" maxlength="15" class="col-lg-2 col-form-label control-label">Build Version</label>
         <div class="col">
           <input type="text" class="form-control" placeholder="Enter Build Version" id="buildVersion"
             [(ngModel)]="bug.buildVersion" name="buildVersion" required>
         </div>
 
-        <label for="colFormLabelLg" class="col-lg-2 col-form-label control-label">Project ID</label>
+        <label for="colFormLabelLg" maxlength="10" class="col-lg-2 col-form-label control-label">Project ID</label>
 
         <div class="col">
           <input type="text" class="form-control" placeholder="Enter project ID" id="projectId"
@@ -119,13 +118,13 @@
 
     <div>
       <div class="form-group row">
-        <label for="colFormLabelLg" class="col-lg-2 col-form-label control-label control-label">Module</label>
+        <label for="colFormLabelLg" maxlength="50" class="col-lg-2 col-form-label control-label control-label">Module</label>
         <div class="col">
           <input type="text" class="form-control" placeholder="Enter Module" id="module" [(ngModel)]="bug.module"
             name="module" required>
         </div>
 
-        <label for="colFormLabelLg" class="col-lg-2 col-form-label control-label control-label">Product</label>
+        <label for="colFormLabelLg" maxlength="50" class="col-lg-2 col-form-label control-label control-label">Product</label>
 
         <div class="col">
           <input type="text" class="form-control" placeholder="Enter Product Type " id="product"
