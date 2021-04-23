@@ -89,8 +89,9 @@ export class GetBugComponent implements OnInit {
       if (bugTitle.trim()) {
         const promise = this.bugService.getBugByName(bugTitle);
         promise.subscribe(response => {
-          this.bugList = [response];
-          if (response!=null) {
+          this.bugList = response;
+          this.bugArray=this.bugList;
+          if (this.bugArray.length>0) {
             console.log(response);
             alert("Bug Listed!");
           }

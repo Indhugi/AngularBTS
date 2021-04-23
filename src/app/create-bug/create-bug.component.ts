@@ -53,7 +53,7 @@ export class CreateBugComponent implements OnInit {
     }
   }
   saveBug() {
-    this.validateFields();
+    //this.validateFields();
     let createBug = (<HTMLInputElement>document.getElementById('createBug'))
     if (!createBug.checkValidity()) {
       alert('Form is Invalid!');
