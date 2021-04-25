@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BugService } from '../bug.service';
 import { Bug } from '../Bug';
+import { STATUS } from '../STATUS';
 
 @Component({
   selector: 'app-update-bug',
@@ -10,7 +11,7 @@ import { Bug } from '../Bug';
 export class UpdateBugComponent implements OnInit {
   //title: String = 'BugForm';
   bug: Bug = new Bug();
-  oldStatus: string;
+  oldStatus: any;
   bugList:any;
   bugArray: Bug[] = [];
   todayDate: Date= new Date();
@@ -70,12 +71,12 @@ export class UpdateBugComponent implements OnInit {
         console.log(this.bugArray);
         if(this.bugArray.length>0){
             this.bug=this.bugArray[0];
-            this.oldStatus= this.bugList.status;
+            this.oldStatus= this.bug.status;
             let resEtaDate = this.bug.etaDate;
-            let resSubmitDate=this.bugList.submitOn;
+            let resSubmitDate=this.bug.submitOn;
             if (resSubmitDate) {
               let finalSubmitDate = resSubmitDate.split('T')[0];
-              this.bug.submitOnDate = finalSubmitDate;
+              this.bug.submitOn = finalSubmitDate;
             }
              if (resEtaDate) {
                 let finalEtaDate = resEtaDate.split('T')[0];
@@ -112,7 +113,7 @@ export class UpdateBugComponent implements OnInit {
       priority: (<HTMLInputElement>document.getElementById('priority')).value,
       status: (<HTMLInputElement>document.getElementById('status')).value,
       type: (<HTMLInputElement>document.getElementById('type')).value,
-      submitOnDate: (<HTMLInputElement>document.getElementById('submitOnDate')).value,
+      submitOn: (<HTMLInputElement>document.getElementById('submitOn')).value,
       buildVersion: (<HTMLInputElement>document.getElementById('buildVersion')).value,
       projectId: (<HTMLInputElement>document.getElementById('projectId')).value,
       module: (<HTMLInputElement>document.getElementById('module')).value,

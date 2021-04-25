@@ -9,7 +9,7 @@ export class Bug{
   status:STATUS;
   buildVersion:string;
   projectId:string;
-  submitOnDate='';
+  submitOn='';
   module:string;
   description='';
   title='';
