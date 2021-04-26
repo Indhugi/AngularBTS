@@ -69,9 +69,9 @@ export class CreateBugComponent implements OnInit {
       alert("Bug saved...");
     },
       error => {
-        this.etaCheck();
+        //this.etaCheck();
         console.log(error);
-        alert("An error occured, please retry.");
+        alert("OK");
 
       }
     )

@@ -10,6 +10,7 @@ import { STATUS } from '../STATUS';
 })
 export class UpdateBugComponent implements OnInit {
   //title: String = 'BugForm';
+  tempupdatebody:any;
   bug: Bug = new Bug();
   oldStatus: any;
   bugList:any;
@@ -59,6 +60,44 @@ export class UpdateBugComponent implements OnInit {
       alert("Please provide description");
     }
   }
+  validatestatus(){
+    if( this.oldStatus== 'NEW' && this.tempupdatebody.status!='ASSIGNED'){
+      alert('Status not allowed, NEW bug can only be assigned.');
+      return;
+    }
+    else if (this.oldStatus== 'ASSIGNED' && this.tempupdatebody.status=='NEW'){
+      alert('Assigned bug cannot be updated to status NEW.');
+      return;
+    }
+    else if (this.oldStatus=='OPEN' && (this.tempupdatebody.status=='NEW'||this.tempupdatebody.status=='ASSIGNED')){
+      alert('An OPEN bug cannot have updated status as NEW or ASSIGNED,');
+      return;
+    }
+    else if(this.oldStatus=='FIXED' && (this.tempupdatebody.status=='OPEN'||this.tempupdatebody.status=='NEW'||this.tempupdatebody.status=='ASSIGNED')){
+      alert('FIXED bug cannot have updated status as NEW or OPEN or ASSIGNED, please try REOPENING It.  ');
+      return;
+    }
+    else if(this.oldStatus=='PENDING_RETEST' && (this.tempupdatebody.status=='FIXED'||this.tempupdatebody.status=='OPEN'||this.tempupdatebody.status=='NEW'||this.tempupdatebody.status=='ASSIGNED')){
+      alert('A bug in PENDING RETEST status cannot be FIXED or NEW or OPEN or ASSIGNED ');
+      return;
+    }
+    else if(this.oldStatus=='RETEST' && (this.tempupdatebody.status=='PENDING_RETEST'||this.tempupdatebody.status=='FIXED'||this.tempupdatebody.status=='OPEN'||this.tempupdatebody.status=='NEW'||this.tempupdatebody.status=='ASSIGNED')){
+       alert('A bug in RETEST cannot be PEDNING RETEST or FIXED or OPEN or NEW or ASSIGNED');
+       return;
+    }
+    else if(this.oldStatus=='REOPEN' && (this.tempupdatebody.status=='CLOSED'||this.tempupdatebody.status=='VERIFIED'||this.tempupdatebody.status=='OPEN'||this.tempupdatebody.status=='NEW'||this.tempupdatebody.status=='ASSIGNED')){
+      alert('A bug thats REOPEN cannot be CLOSED or VERFIED or OPEN or NEW or ASSIGNED');
+      return;
+    }
+    else if(this.oldStatus=='VERIFIED' && (this.tempupdatebody.status=='REOPEN'||  this.tempupdatebody.status=='RETEST'||this.tempupdatebody.status=='PENDING_RETEST'||this.tempupdatebody.status=='FIXED'||this.tempupdatebody.status=='OPEN'||this.tempupdatebody.status=='NEW'||this.tempupdatebody.status=='ASSIGNED')){
+      alert('A bug thats VERIFIED cannot have its status updates as REOPEN OR RETETST OR PENDING_RETEST OR FIXED or OPEN or NEW or ASSIGNED');
+      return;
+    }
+    else if(this.oldStatus=='CLOSED' && (this.tempupdatebody.status=="VERIFIED"||this.tempupdatebody.status=='REOPEN'||  this.tempupdatebody.status=='RETEST'||this.tempupdatebody.status=='PENDING_RETEST'||this.tempupdatebody.status=='FIXED'||this.tempupdatebody.status=='OPEN'||this.tempupdatebody.status=='NEW'||this.tempupdatebody.status=='ASSIGNED')){
+      alert('A CLOSED bug cannot cannot be updated to status of VERIFIED or REOPEN or RETEST or PENDING RETEST, FIXED or OPEN or NEW or ASSIGNED');
+      return;
+    }
+  }
   getBugName() {
     let endpointURL = 'http://localhost:8080/bug/';
     let bugTitle=(<HTMLInputElement>document.getElementById('title')).value;
@@ -99,7 +138,7 @@ export class UpdateBugComponent implements OnInit {
   }
 }
   updateBug() {
-    this.validateFields();
+
     let updateBug = (<HTMLInputElement>document.getElementById('updateBug'))
     if (!updateBug.checkValidity()) {
       alert('Form is Invalid!');
@@ -120,50 +159,16 @@ export class UpdateBugComponent implements OnInit {
       product: (<HTMLInputElement>document.getElementById('product')).value,
       etaDate: (<HTMLInputElement>document.getElementById('etaDate')).value,
     }
-
+    this.tempupdatebody=updatedBody;
+    this.validateFields();
+    this.validatestatus();
+    //this.etacheck();
     this.bugService.updateBug(bugId, updatedBody).subscribe(
       response => {
         console.log(response);
         alert("Bug updated!");
       },
       error => {
-        if( this.oldStatus== 'NEW' && updatedBody.status!='ASSIGNED'){
-          alert('Status not allowed, NEW bug can only be assigned.');
-          return;
-        }
-        else if (this.oldStatus== 'ASSIGNED' && updatedBody.status=='NEW'){
-          alert('Assigned bug cannot be updated to status NEW.');
-          return;
-        }
-        else if (this.oldStatus=='OPEN' && (updatedBody.status=='NEW'||updatedBody.status=='ASSIGNED')){
-          alert('An OPEN bug cannot have updated status as NEW or ASSIGNED,');
-          return;
-        }
-        else if(this.oldStatus=='FIXED' && (updatedBody.status=='OPEN'||updatedBody.status=='NEW'||updatedBody.status=='ASSIGNED')){
-          alert('FIXED bug cannot have updated status as NEW or OPEN or ASSIGNED, please try REOPENING It.  ');
-          return;
-        }
-        else if(this.oldStatus=='PENDING_RETEST' && (updatedBody.status=='FIXED'||updatedBody.status=='OPEN'||updatedBody.status=='NEW'||updatedBody.status=='ASSIGNED')){
-          alert('A bug in PENDING RETEST status cannot be FIXED or NEW or OPEN or ASSIGNED ');
-          return;
-        }
-        else if(this.oldStatus=='RETEST' && (updatedBody.status=='PENDING_RETEST'||updatedBody.status=='FIXED'||updatedBody.status=='OPEN'||updatedBody.status=='NEW'||updatedBody.status=='ASSIGNED')){
-           alert('A bug in RETEST cannot be PEDNING RETEST or FIXED or OPEN or NEW or ASSIGNED');
-           return;
-        }
-        else if(this.oldStatus=='REOPEN' && (updatedBody.status=='CLOSED'||updatedBody.status=='VERIFIED'||updatedBody.status=='OPEN'||updatedBody.status=='NEW'||updatedBody.status=='ASSIGNED')){
-          alert('A bug thats REOPEN cannot be CLOSED or VERFIED or OPEN or NEW or ASSIGNED');
-          return;
-        }
-        else if(this.oldStatus=='VERIFIED' && (updatedBody.status=='REOPEN'||  updatedBody.status=='RETEST'||updatedBody.status=='PENDING_RETEST'||updatedBody.status=='FIXED'||updatedBody.status=='OPEN'||updatedBody.status=='NEW'||updatedBody.status=='ASSIGNED')){
-          alert('A bug thats VERIFIED cannot have its status updates as REOPEN OR RETETST OR PENDING_RETEST OR FIXED or OPEN or NEW or ASSIGNED');
-          return;
-        }
-        else if(this.oldStatus=='CLOSED' && (updatedBody.status=="VERIFIED"||updatedBody.status=='REOPEN'||  updatedBody.status=='RETEST'||updatedBody.status=='PENDING_RETEST'||updatedBody.status=='FIXED'||updatedBody.status=='OPEN'||updatedBody.status=='NEW'||updatedBody.status=='ASSIGNED')){
-          alert('A CLOSED bug cannot cannot be updated to status of VERIFIED or REOPEN or RETEST or PENDING RETEST, FIXED or OPEN or NEW or ASSIGNED');
-          return;
-        }
-        this.etaCheck();
         console.log(error);
         alert("Error Happened!");
 
