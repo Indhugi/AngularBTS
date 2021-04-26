@@ -62,7 +62,7 @@
 
     <div class="table-responsive">
       <table class=" table table-bordered ">
-        <thead>
+        <thead style="font-weight:bold;font-family: sans-serif;">
 
           <td scope="col" style="border: 2px solid #000000;"> Title </td>
           <td scope="col" style="border: 2px solid #000000;"> Description </td>
@@ -83,7 +83,10 @@
 
             <tr>
               <td id="titlewidth"scope="col" style="border: 2px solid #000000;">{{bug.title}}</td>
-              <td scope="col" style="border: 2px solid #000000;">{{bug.description}}</td>
+              <td scope="col" *ngIf="bug.description.length<15"  style="border: 2px solid #000000;">{{bug.description}}</td>
+              <td  *ngIf="!(bug.description.length<15)" style="border: 2px solid #000000;"> {{bug.description | slice:0:15}}<sub><button
+                class="btn btn-link btn-xs" (click)=showDescription(bug.description)>Read More</button></sub>
+              </td>
               <td scope="col" style="border: 2px solid #000000;">{{bug.status|titlecase}}</td>
               <td scope="col" style="border: 2px solid #000000;">{{bug.priority|titlecase}}</td>
               <td scope="col" style="border: 2px solid #000000;">{{bug.type|titlecase}}</td>
@@ -100,6 +103,29 @@
         </tbody>
 
       </table>
+      <div id='showmore' >
+        <div>
+          <button style="display:none" class="btn btn-link btn-lg" data-toggle="modal"
+            data-target="#myModalDescription" id='temp'>...</button>
+        </div>
+        <div class="modal fade" id="myModalDescription" role="dialog"   >
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header" >
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title">Description</h4>
+              </div>
+              <div class="modal-body" id='showDescription'>
+                <p></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </form>

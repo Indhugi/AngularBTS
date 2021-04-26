@@ -14,6 +14,10 @@ export class GetBugComponent implements OnInit {
   bugList: any;
   bugArray: Bug[] = [];
 
+  showDescription(description: string) {
+    document.getElementById('showDescription').innerHTML = description;
+    return document.getElementById('temp').click();
+  }
   deleteBug(bugId){
     let ask=confirm("Do you want to delete bug this bug ?");
     if (!ask){
